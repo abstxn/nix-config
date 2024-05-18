@@ -4,11 +4,9 @@
 
 home.username = "abstxn";
 home.homeDirectory = "/home/abstxn";
-home.stateVersion = "23.11";
 home.packages = with pkgs; [
 
   # CLI Tools
-  neovim
   fzf
   tree
 
@@ -27,16 +25,31 @@ home.packages = with pkgs; [
 ];
 
 
-programs.home-manager.enable = true;
-
 programs.git = {
   enable = true;
   userName = "abstxn";
   userEmail = "108669111+abstxn@users.noreply.github.com";
 };
 
+programs.neovim = {
+  enable = true;
+  viAlias = true;
+  vimAlias = true;
+};
+
+
+gtk = {
+  enable = true;
+  cursorTheme = {
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Ice";
+  };
+};
+
 
 fonts.fontconfig.enable = true;
-nixpkgs.config.allowUnfree = true;
+
+home.stateVersion = "23.11";
+programs.home-manager.enable = true;
 
 }

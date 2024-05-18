@@ -2,13 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, config, pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.home-manager
     ];
 
   # Bootloader.
@@ -116,22 +115,18 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  home-manager = {
-    extraSpecialArgs = { inherit inputs; };
-    users = {
-      abstxn = import ./home.nix;
-    };
-  };
-  fonts.fontconfig.defaultFonts.monospace = [ "JetBrainsMonoNL NFM" ];
+  # This does not align with configuration-home seperation.
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     git
-    neovim
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
   #  wget
   ];
+
+  environment.variables.EDITOR = "nvim";
+  fonts.fontconfig.defaultFonts.monospace = [ "JetBrainsMonoNL NFM" ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
