@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-
 home.username = "abstxn";
 home.homeDirectory = "/home/abstxn";
 home.packages = with pkgs; [
@@ -73,7 +72,6 @@ systemd.user.startServices = true;
 fonts.fontconfig.enable = true;
 fonts.fontconfig.defaultFonts.monospace = [ "JetBrainsMonoNL NFM" ];
 
-home.stateVersion = "23.11";
+home.stateVersion = "24.05";
 programs.home-manager.enable = true;
-
 }
