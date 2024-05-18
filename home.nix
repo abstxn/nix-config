@@ -47,11 +47,11 @@ gtk = {
   };
 };
 
+# systemd services
 systemd.user.services."heartbeat" = {
   Unit.Description = "Ping EMBERTON";
   Service.ExecStart = "${pkgs.pipewire}/bin/pw-play --target EMBERTON /home/abstxn/nixos/inaudible.mp3";
 };
-
 systemd.user.timers."heartbeat" = {
   Unit.Description = "Periodically run heartbeat service.";
   Install.WantedBy = [ "timers.target" ];
@@ -60,10 +60,10 @@ systemd.user.timers."heartbeat" = {
     Persistent = true;
   };
 };
-
 systemd.user.startServices = true;
 
 
+# Fonts
 fonts.fontconfig.enable = true;
 fonts.fontconfig.defaultFonts.monospace = [ "JetBrainsMonoNL NFM" ];
 
