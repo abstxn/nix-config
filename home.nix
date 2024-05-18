@@ -46,6 +46,30 @@ gtk = {
   };
 };
 
+systemd.user.services."heartbeat" = {
+  Unit = {
+    Description = "Ping EMBERTON";
+  };
+  Service = {
+    ExecStart = "${pkgs.pipewire}/bin/pw-play --target EMBERTON /home/abstxn/nixos/inaudible.mp3";
+  };
+};
+
+systemd.user.timers."heartbeat" = {
+  Unit = {
+    Description = "Periodically run heartbeat service.";
+  };
+  Timer = {
+    OnCalendar = "*:0/3";
+    Persistent = true;
+  };
+  Install = {
+    WantedBy = [ "timers.target" ];
+  };
+};
+
+systemd.user.startServices = true;
+
 
 fonts.fontconfig.enable = true;
 
