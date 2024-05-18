@@ -33,9 +33,15 @@ programs.git = {
 
 programs.neovim = {
   enable = true;
-  defaultEditor = true;
   viAlias = true;
   vimAlias = true;
+};
+
+programs.bash = {
+  enable = true;
+  sessionVariables = {
+    EDITOR = "nvim";
+  };
 };
 
 
