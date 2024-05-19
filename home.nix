@@ -43,13 +43,7 @@ programs.bash = {
   };
 };
 
-services.syncthing = {
-  enable = true;
-  extraOptions = [
-    "--home=/home/abstxn/syncthing"
-  ];
-};
-
+services.syncthing.enable = true;
 
 gtk = {
   enable = true;
