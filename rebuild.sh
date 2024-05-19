@@ -1,7 +1,7 @@
 #!/bin/sh
 
 set -e
-pushd ~/nixos/
+pushd ~/nix-config/
 
 git diff -U0 *.nix
 echo "Rebuilding NixOS..."

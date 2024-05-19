@@ -56,7 +56,7 @@ gtk = {
 # systemd services
 systemd.user.services."heartbeat" = {
   Unit.Description = "Ping EMBERTON";
-  Service.ExecStart = "${pkgs.pipewire}/bin/pw-play --target EMBERTON /home/abstxn/nixos/inaudible.mp3";
+  Service.ExecStart = "${pkgs.pipewire}/bin/pw-play --target EMBERTON /home/abstxn/nix-config/inaudible.mp3";
 };
 systemd.user.timers."heartbeat" = {
   Unit.Description = "Periodically run heartbeat service.";
