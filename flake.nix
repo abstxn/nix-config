@@ -1,35 +1,36 @@
 {
-description = "Default configuration for Opus";
+  description = "Default configuration for Opus";
 
+  inputs = {
 
-inputs = {
+    # Nixpkgs
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-  nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-
-  home-manager = {
-    url = "github:nix-community/home-manager";
-    inputs.nixpkgs.follows = "nixpkgs";
+    # Home Manager
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-};
 
-
-outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-
-  nixosConfigurations.opus = nixpkgs.lib.nixosSystem {
+  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
+  let
+    inherit (nixpkgs) lib;
     system = "x86_64-linux";
-    specialArgs = { inherit inputs; };
-    modules = [
-      ./configuration.nix
-      home-manager.nixosModules.home-manager {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.abstxn = import ./home.nix;
-        }
-    ];
+    hm-config = {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.users.abstxn = import ./home.nix;
+    };
+  in {
+    nixosConfigurations.opus = lib.nixosSystem {
+      inherit system;
+      # specialArgs = { inherit inputs; };
+      modules = [
+        ./configuration.nix
+        home-manager.nixosModules.home-manager hm-config
+      ];
+    };
   };
-
-};
-
-
 }
