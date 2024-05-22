@@ -18,18 +18,13 @@
   let
     inherit (nixpkgs) lib;
     system = "x86_64-linux";
-    hm-config = {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.users.abstxn = import ./home.nix;
-    };
   in {
     nixosConfigurations.opus = lib.nixosSystem {
       inherit system;
-      # specialArgs = { inherit inputs; };
+      specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
-        home-manager.nixosModules.home-manager hm-config
+        home-manager.nixosModules.default
       ];
     };
   };

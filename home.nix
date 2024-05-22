@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
+
+imports = [
+  ./home/abstxn/common/optional/services/emberton
+];
+
 home.username = "abstxn";
 home.homeDirectory = "/home/abstxn";
 home.packages = with pkgs; [
@@ -23,6 +28,8 @@ home.packages = with pkgs; [
   (nerdfonts.override { fonts = ["JetBrainsMono"]; })
 
 ];
+
+nixpkgs.config.allowUnfree = true;
 
 
 programs.git = {
@@ -54,20 +61,20 @@ gtk = {
   };
 };
 
-# systemd services
-systemd.user.services."heartbeat" = {
-  Unit.Description = "Ping EMBERTON";
-  Service.ExecStart = "${pkgs.pipewire}/bin/pw-play --target EMBERTON /home/abstxn/nix-config/inaudible.mp3";
-};
-systemd.user.timers."heartbeat" = {
-  Unit.Description = "Periodically run heartbeat service.";
-  Install.WantedBy = [ "timers.target" ];
-  Timer = {
-    OnCalendar = "*:0/3";
-    Persistent = true;
-  };
-};
-systemd.user.startServices = true;
+# # systemd services
+# systemd.user.services."emberton" = {
+#   Unit.Description = "Ping EMBERTON";
+#   Service.ExecStart = "${pkgs.pipewire}/bin/pw-play --target EMBERTON ${./inaudible.mp3}";
+# };
+# systemd.user.timers."emberton" = {
+#   Unit.Description = "Periodically run heartbeat service.";
+#   Install.WantedBy = [ "timers.target" ];
+#   Timer = {
+#     OnCalendar = "*:0/1";
+#     Persistent = true;
+#   };
+# };
+# systemd.user.startServices = true;
 
 
 # Fonts

@@ -1,11 +1,10 @@
 { lib, ... }: {
-  # Set your time zone.
-  time.timeZone = "Asia/Singapore";
 
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_SG.UTF-8";
+  time.timeZone = lib.mkDefault "Asia/Singapore";
 
-  i18n.extraLocaleSettings = {
+  i18n.defaultLocale = lib.mkDefault "en_SG.UTF-8";
+
+  i18n.extraLocaleSettings = lib.mkDefault {
     LC_ADDRESS = "en_SG.UTF-8";
     LC_IDENTIFICATION = "en_SG.UTF-8";
     LC_MEASUREMENT = "en_SG.UTF-8";
