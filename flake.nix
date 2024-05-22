@@ -23,7 +23,7 @@
       inherit system;
       specialArgs = { inherit inputs; };
       modules = [
-        ./configuration.nix
+        ./hosts/opus
         home-manager.nixosModules.default
       ];
     };

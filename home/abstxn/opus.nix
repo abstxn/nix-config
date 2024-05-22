@@ -3,7 +3,7 @@
 {
 
 imports = [
-  ./home/abstxn/common/optional/services/emberton
+  ./common/optional/services/emberton
 ];
 
 home.username = "abstxn";
@@ -60,21 +60,6 @@ gtk = {
     name = "Bibata-Modern-Ice";
   };
 };
-
-# # systemd services
-# systemd.user.services."emberton" = {
-#   Unit.Description = "Ping EMBERTON";
-#   Service.ExecStart = "${pkgs.pipewire}/bin/pw-play --target EMBERTON ${./inaudible.mp3}";
-# };
-# systemd.user.timers."emberton" = {
-#   Unit.Description = "Periodically run heartbeat service.";
-#   Install.WantedBy = [ "timers.target" ];
-#   Timer = {
-#     OnCalendar = "*:0/1";
-#     Persistent = true;
-#   };
-# };
-# systemd.user.startServices = true;
 
 
 # Fonts

@@ -8,14 +8,14 @@
 imports =
   [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./hosts/common/core
+    ../common/core
     inputs.home-manager.nixosModules.default
   ];
 
 home-manager = {
   extraSpecialArgs = { inherit inputs; };
   users = {
-    "abstxn" = import ./home.nix;
+    "abstxn" = import ../../home/abstxn/opus.nix;
   };
 };
 
