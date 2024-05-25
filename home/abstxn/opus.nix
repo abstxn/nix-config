@@ -4,6 +4,7 @@
 
 imports = [
   ./common/optional/services/emberton
+  ./common/optional/proton.nix
 ];
 
 home.username = "abstxn";
