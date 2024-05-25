@@ -9,6 +9,7 @@ imports =
   [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../common/core
+    ../optional/steam.nix
     inputs.home-manager.nixosModules.default
     inputs.hardware.nixosModules.common-cpu-amd
     inputs.hardware.nixosModules.common-gpu-amd

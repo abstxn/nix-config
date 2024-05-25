@@ -1,6 +1,22 @@
-building the system configuration...
-activating the configuration...
-setting up /etc...
-reloading user units for abstxn...
-restarting sysinit-reactivation.target
-the following new units were started: sysinit-reactivation.target, systemd-tmpfiles-resetup.service
+error:
+       … while calling the 'seq' builtin
+
+         at /nix/store/0aavdx9m5ms1cj5pb1dx0brbrbigy8ij-source/lib/modules.nix:322:18:
+
+          321|         options = checked options;
+          322|         config = checked (removeAttrs config [ "_module" ]);
+             |                  ^
+          323|         _module = checked (config._module);
+
+       … while evaluating a branch condition
+
+         at /nix/store/0aavdx9m5ms1cj5pb1dx0brbrbigy8ij-source/lib/modules.nix:261:9:
+
+          260|       checkUnmatched =
+          261|         if config._module.check && config._module.freeformType == null && merged.unmatchedDefns != [] then
+             |         ^
+          262|           let
+
+       (stack trace truncated; use '--show-trace' to show the full trace)
+
+       error: getting status of '/nix/store/hprdmwvqwf3xwxhwhmxfdwsksbp9a2p6-source/hosts/optional': No such file or directory
