@@ -2,13 +2,25 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ../common/core
+      inputs.home-manager.nixosModules.default
+      inputs.hardware.nixosModules.common-cpu-amd
+      inputs.hardware.nixosModules.common-gpu-nvidia
+      inputs.hardware.nixosModules.common-pc-ssd
     ];
+
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "abstxn" = import ../../home/abstxn/opal.nix;
+    };
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -32,24 +44,6 @@
   networking.defaultGateway = "192.168.50.1";
   networking.nameservers = [ "8.8.8.8" ];
 
-  # Set your time zone.
-  time.timeZone = "Asia/Singapore";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_SG.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_SG.UTF-8";
-    LC_IDENTIFICATION = "en_SG.UTF-8";
-    LC_MEASUREMENT = "en_SG.UTF-8";
-    LC_MONETARY = "en_SG.UTF-8";
-    LC_NAME = "en_SG.UTF-8";
-    LC_NUMERIC = "en_SG.UTF-8";
-    LC_PAPER = "en_SG.UTF-8";
-    LC_TELEPHONE = "en_SG.UTF-8";
-    LC_TIME = "en_SG.UTF-8";
-  };
-
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
@@ -70,8 +64,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
+    git
+    vim
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

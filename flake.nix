@@ -22,13 +22,26 @@
     inherit (nixpkgs) lib;
     system = "x86_64-linux";
   in {
-    nixosConfigurations.opus = lib.nixosSystem {
-      inherit system;
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./hosts/opus
-        home-manager.nixosModules.default
-      ];
+
+    nixosConfigurations = {
+
+      opus = lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/opus
+          home-manager.nixosModules.default
+        ];
+      };
+
+      opal = lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/opal
+          home-manager.nixosModules.default
+        ];
+      };
     };
   };
 }
