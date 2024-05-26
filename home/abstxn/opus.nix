@@ -27,7 +27,9 @@ home.packages = with pkgs; [
 
   # Fonts
   (nerdfonts.override { fonts = ["JetBrainsMono"]; })
-
+  noto-fonts
+  noto-fonts-cjk
+  noto-fonts-emoji
 ];
 
 nixpkgs.config.allowUnfree = true;
