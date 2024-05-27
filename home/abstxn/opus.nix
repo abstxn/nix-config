@@ -24,6 +24,7 @@ home.packages = with pkgs; [
   # Applications
   vscode
   obsidian
+  calibre
 
   # Fonts
   (nerdfonts.override { fonts = ["JetBrainsMono"]; })
