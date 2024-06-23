@@ -26,6 +26,7 @@ home.packages = with pkgs; [
   obsidian
   calibre
   hakuneko
+  activitywatch
 
   # Fonts
   (nerdfonts.override { fonts = ["JetBrainsMono"]; })
@@ -57,6 +58,7 @@ programs.bash = {
 };
 
 services.syncthing.enable = true;
+services.activitywatch.enable = true;
 
 gtk = {
   enable = true;
